@@ -39,15 +39,14 @@ public class CharacterController2D : MonoBehaviour
 
     private void Update()
     {
-		float moveInput = Input.GetAxisRaw("Horizontal");
+		float moveInput = Input.GetAxis("Horizontal");
 		
-		if (moveInput.GetButtonDown("Throw"))
+		if (Input.GetButtonDown("Throw"))
 		{
 			Vector2 throwVelocity = new Vector2(Input.GetAxis("aimHorizontal"), Input.GetAxis("aimVertical"));
 			if (item) 
 			{
-				throwVelocity.Normalize();
-				item.velocity = throwVelocity * throwForce;
+				item.Throw(throwVelocity.normalized * throwForce);
 				item = null;
 			}
 		}
