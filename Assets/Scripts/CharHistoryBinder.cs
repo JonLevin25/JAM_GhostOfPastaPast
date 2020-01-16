@@ -5,6 +5,9 @@ public class CharHistoryBinder : MonoBehaviour
 {
     [SerializeField] private Transform _transform;
     [SerializeField] private CharStateHistory _stateHistory;
+    [SerializeField] private Animator _animator;
+    
+    [Space]
     [SerializeField] private float _secsDelay;
 
     private void Update()
@@ -26,7 +29,11 @@ public class CharHistoryBinder : MonoBehaviour
         _transform.localScale = state.LocalScale;
     }
 
-    private static CharState MostRecentStateBefore(Queue<CharState> queue, float targetTime)
+    /// <summary>
+    /// Get Most recent state
+    /// ALSO ACTIVATES ANIM COMMANDS ALONG THE WAY
+    /// </summary>
+    private CharState MostRecentStateBefore(Queue<CharState> queue, float targetTime)
     {
         if (queue.Count == 0 || queue.Peek().Time > targetTime) return null; 
             
@@ -34,11 +41,21 @@ public class CharHistoryBinder : MonoBehaviour
         while (queue.Count > 0)
         {
             state = queue.Dequeue();
+            HandleAnimCommnads(state.Commands);
 
             var nextTime = state.Time;
             if (nextTime < targetTime) break;
         }
 
         return state;
+    }
+
+    private void HandleAnimCommnads(IEnumerable<AnimCommand> stateCommands)
+    {
+        if (stateCommands == null) return;
+        foreach (var command in stateCommands)
+        {
+            _animator.SetBool(command.PropName, command.PropValue);
+        }
     }
 }
