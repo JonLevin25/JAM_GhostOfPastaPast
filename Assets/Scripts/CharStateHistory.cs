@@ -5,11 +5,13 @@ public class AnimCommand
 {
     public readonly string PropName;
     public readonly bool PropValue;
+    public readonly bool IsTrigger;
 
-    public AnimCommand(string propName, bool propValue)
+    public AnimCommand(string propName, bool propValue, bool isTrigger)
     {
         PropName = propName;
         PropValue = propValue;
+        IsTrigger = isTrigger;
     }
 }
 
@@ -50,7 +52,13 @@ public class CharStateHistory : MonoBehaviour
     
     public void AddAnimBool(string boolName, bool value)
     {
-        var command = new AnimCommand(boolName, true);
+        var command = new AnimCommand(boolName, value, isTrigger: false);
+        _lastFrameAnimCommands.Add(command);
+    }
+
+    public void AddAnimTrigger(string triggerName)
+    {
+        var command = new AnimCommand(triggerName, true, isTrigger: true);
         _lastFrameAnimCommands.Add(command);
     }
 
