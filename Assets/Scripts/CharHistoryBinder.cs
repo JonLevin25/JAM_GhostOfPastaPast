@@ -22,6 +22,8 @@ public class CharHistoryBinder : MonoBehaviour
         }
     }
 
+    public void SetDelay(float delay) => _secsDelay = delay;
+
     private void Bind(CharState state)
     {
         _transform.localPosition = state.LocalPosition;
@@ -66,5 +68,10 @@ public class CharHistoryBinder : MonoBehaviour
                 _animator.SetBool(command.PropName, command.PropValue);
             }
         }
+    }
+
+    public void SetHistorySource(CharStateHistory history)
+    {
+        _stateHistory = history;
     }
 }

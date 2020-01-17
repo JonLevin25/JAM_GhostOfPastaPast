@@ -46,6 +46,7 @@ public class CharState
 public class CharStateHistory : MonoBehaviour
 {
     [SerializeField] private Transform _transform;
+
     public Queue<CharState> StateHistory = new Queue<CharState>();
 
     private List<AnimCommand> _lastFrameAnimCommands = new List<AnimCommand>();
