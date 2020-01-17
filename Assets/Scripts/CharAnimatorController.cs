@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class CharAnimatorController : MonoBehaviour
@@ -17,13 +18,35 @@ public class CharAnimatorController : MonoBehaviour
     private const string AnimAirborne = "Airborne";
     private const string AnimRun = "Run";
 
+    [SerializeField] private AudioClip _jumpAudio;
+    [SerializeField] private AudioClip _landAudio;
+
+    [SerializeField] private AudioSource _audioSource;
+
+    private void Awake()
+    {
+        _audioSource = GetComponent<AudioSource>();
+        
+    }
+
+
     public void OnJump()
     {
         SetAnimTrigger(AnimJump);
         SetAnimBool(AnimAirborne, true);
+        _audioSource.clip = _jumpAudio;
+        _audioSource.Play();
     }
 
-    public void SetGrounded(bool grounded) => SetAnimBool(AnimAirborne, !grounded);
+    public void SetGrounded(bool grounded)
+    {
+        if (grounded && _animator.GetBool(AnimAirborne) == false)
+        {
+            // _audioSource.clip = _landAudio;
+            // _audioSource.Play();
+        }
+        SetAnimBool(AnimAirborne, !grounded);
+    }
 
     public void SetRunning(bool running) => SetAnimBool(AnimRun, running);
     
