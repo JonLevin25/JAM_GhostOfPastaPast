@@ -85,6 +85,7 @@ public class CharAnimatorController : MonoBehaviour
 
     private void OnDeath()
     {
+        
         SetAnimTrigger(AnimDeath);
     }
 

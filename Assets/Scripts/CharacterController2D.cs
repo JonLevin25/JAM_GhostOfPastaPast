@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class CharacterController2D : MonoBehaviour
 {
@@ -31,14 +32,17 @@ public class CharacterController2D : MonoBehaviour
 
 	private Vector2 aimDirection = new Vector2(-1,0);
 	private PlayerConfig playerConfig;
-	
+	private bool dead;
+
 	private void Start()
 	{
 		playerConfig = PlayerConfig.GetConfig(_playerNum);
+		playerConfig.PlayerHealth.OnDeath += OnDeath;
 	}
 
 	private void Update()
 	{
+		 if (dead) return;
 		var inputPayload = playerConfig.GetInput();
 		var newVelocity = new Vector2(0f, body.velocity.y);
 		
@@ -77,6 +81,12 @@ public class CharacterController2D : MonoBehaviour
 		_animController.SetGrounded(grounded);
 		_animController.ConfigByVelocity(newVelocity);
     }
+
+	private void OnDeath()
+	{
+		body.velocity = Vector2.zero;
+		dead = true;
+	}
 
 	public void ItemCaught(Throwable caughtItem) {
 		item = caughtItem;
