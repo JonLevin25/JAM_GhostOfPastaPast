@@ -60,16 +60,20 @@ public class CharacterController2D : MonoBehaviour
 		}
 		
 		var grounded = Physics2D.Raycast(legs.position, -legs.up, 0.1f, platformLayerMask);
-		_animController.SetGrounded(grounded);
 		if (grounded && Input.GetButtonDown("Jump"))
 		{
 			// Calculate the velocity required to achieve the target jump height.
 			newVelocity.y = Mathf.Sqrt(2 * jumpHeight * Mathf.Abs(Physics2D.gravity.y));
+			_animController.OnJump();
 		}
 
 		// Update the velocity assignment statements to use our selected
 		// acceleration and deceleration values.
 		newVelocity.x =  speed * moveInput;
 		body.velocity = newVelocity;
+		
+		// Set Animation state
+		_animController.SetGrounded(grounded);
+		_animController.ConfigByVelocity(newVelocity);
     }
 }

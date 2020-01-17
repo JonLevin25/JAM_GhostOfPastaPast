@@ -22,12 +22,16 @@ public class CharAnimatorController : MonoBehaviour
         SetAnimBool(AnimAirborne, true);
     }
 
-    public void OnGrounded() => SetAnimBool(AnimAirborne, false);
+    public void SetGrounded(bool grounded) => SetAnimBool(AnimAirborne, !grounded);
 
     public void SetRunning(bool running) => SetAnimBool(AnimRun, running);
-    public void SetDirection(RunDirection direction)
+    
+    public void ConfigByVelocity(Vector3 velocity)
     {
-        var shouldFlip = direction == RunDirection.Left;
+        var isRunning = velocity.sqrMagnitude > 0.2f;
+        SetRunning(isRunning);
+        
+        var shouldFlip = velocity.x < 0f;
         _rend.flipX = shouldFlip;
     }
 
@@ -41,10 +45,5 @@ public class CharAnimatorController : MonoBehaviour
     {
         _animator.SetTrigger(triggerName);
         _stateHistory.AddAnimTrigger(triggerName);
-    }
-
-    public void SetGrounded(bool grounded)
-    {
-        // WIP
     }
 }
