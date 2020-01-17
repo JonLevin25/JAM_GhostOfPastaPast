@@ -8,7 +8,7 @@ public class PlayerConfig : MonoBehaviour
     
     [Header("Input")]
     public string HorizontalAxis;
-    public string VerticalAxis;
+//    public string VerticalAxis;
     public string AimHorizontalAxis;
     public string AimVerticalAxis;
     public string JumpButton;
