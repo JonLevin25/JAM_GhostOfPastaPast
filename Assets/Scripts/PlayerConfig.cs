@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using Rewired;
 using UnityEngine;
@@ -7,7 +9,7 @@ public class PlayerConfig : MonoBehaviour
     [SerializeField] PlayerNum _playerNum;
     [SerializeField] private MouseAimInput _mouseAim;
     [SerializeField] private Color _color;
-    
+
     public Health PlayerHealth;
     public bool UseMouseForAim;
     public Color PlayerColor => _color;
@@ -20,6 +22,8 @@ public class PlayerConfig : MonoBehaviour
 
     private static readonly Dictionary<PlayerNum, PlayerConfig> ConfigDict = new Dictionary<PlayerNum, PlayerConfig>();
 
+    private bool JoystickActive;
+
     private void Awake() => ConfigDict[_playerNum] = this;
 
     public static PlayerConfig GetConfig(PlayerNum playerNum) => ConfigDict[playerNum];
@@ -31,17 +35,26 @@ public class PlayerConfig : MonoBehaviour
         var aim = GetAim(rePlayer);
         var jump = rePlayer.GetButtonDown(JumpButton);
         var @throw = rePlayer.GetButtonDown(ThrowButton);
-        
+
         return new PlayerInputPayload(move, aim, jump, @throw);
     }
-
+    
     private Vector2 GetAim(Player rePlayer)
     {
-        if (UseMouseForAim && _mouseAim != null) return _mouseAim.GetAim();
-
-        return new Vector2(
+        var hasJoystick = rePlayer.controllers.joystickCount > 0;
+        if (!hasJoystick && UseMouseForAim) return _mouseAim.GetAim();
+        
+        var rewiredAim = new Vector2(
             rePlayer.GetAxis(AimHorizontalAxis), 
             rePlayer.GetAxis(AimVerticalAxis));
+        return rewiredAim;
+    }
+
+    private static Vector2 ComponentAbsMax(Vector2 a, Vector2 b)
+    {
+        var x = Mathf.Abs(a.x) > Mathf.Abs(b.x) ? a.x : b.x; 
+        var y = Mathf.Abs(a.y) > Mathf.Abs(b.y) ? a.y : b.y; 
+        return new Vector2(x, y);
     }
 }
 
