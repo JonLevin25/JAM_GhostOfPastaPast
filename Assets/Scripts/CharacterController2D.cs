@@ -27,7 +27,10 @@ public class CharacterController2D : MonoBehaviour
 	[SerializeField]
 	Transform legs;
 
-	Throwable item;
+
+	public Throwable item;
+	
+    private BoxCollider2D boxCollider;
 
 	private Vector2 velocity;
 	
