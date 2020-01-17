@@ -27,6 +27,15 @@ public class CharacterController2D : MonoBehaviour
 	[SerializeField]
 	GameObject crosshair;
 
+	[SerializeField]
+	LayerMask platformLayerMask;
+
+	[SerializeField]
+	Rigidbody2D body;
+
+	[SerializeField]
+	Transform legs;
+
 	Throwable item;
 	
     private BoxCollider2D boxCollider;
@@ -45,6 +54,7 @@ public class CharacterController2D : MonoBehaviour
     private void Update()
     {
 		float moveInput = Input.GetAxis("Horizontal");
+		Vector2 newVelocity = new Vector2(0f, body.velocity.y);
 		
 		Vector2 newAimDirection = new Vector2(Input.GetAxis("aimHorizontal"), Input.GetAxis("aimVertical"));
 		if (newAimDirection.x != 0 || newAimDirection.y != 0) {
@@ -65,18 +75,12 @@ public class CharacterController2D : MonoBehaviour
 		// jump
 		if (grounded)
 		{
-			velocity.y = 0;
-			
 			if (Input.GetButtonDown("Jump"))
 			{
 				// Calculate the velocity required to achieve the target jump height.
-				velocity.y = Mathf.Sqrt(2 * jumpHeight * Mathf.Abs(Physics2D.gravity.y));
+				newVelocity.y = Mathf.Sqrt(2 * jumpHeight * Mathf.Abs(Physics2D.gravity.y));
 			}
-			
 		}
-		
-		// fall down when in the air
-		velocity.y += Physics2D.gravity.y * Time.deltaTime;
 		
 		// horizontal movement
 		float acceleration = grounded ? walkAcceleration : airAcceleration;
@@ -84,38 +88,12 @@ public class CharacterController2D : MonoBehaviour
 
 		// Update the velocity assignment statements to use our selected
 		// acceleration and deceleration values.
-		if (moveInput != 0)
-		{
-			velocity.x = Mathf.MoveTowards(velocity.x, speed * moveInput, acceleration * Time.deltaTime);
-		}
-		else
-		{
-			velocity.x = Mathf.MoveTowards(velocity.x, 0, deceleration * Time.deltaTime);
-		}
-		transform.Translate(velocity * Time.deltaTime);
+		newVelocity.x =  speed * moveInput;
+		body.velocity = newVelocity;
 		
 		// collision detection
-		Collider2D[] hits = Physics2D.OverlapBoxAll(transform.position, boxCollider.size, 0);
+		Collider2D[] hits = Physics2D.OverlapBoxAll(transform.position, boxCollider.size, 0, platformLayerMask);
 		
-		grounded = false;
-		foreach (Collider2D hit in hits)
-		{
-			if (hit == boxCollider)
-				continue;
-
-			ColliderDistance2D colliderDistance = hit.Distance(boxCollider);
-
-			if (colliderDistance.isOverlapped)
-			{
-				// stop moving on collision
-				transform.Translate(colliderDistance.pointA - colliderDistance.pointB);
-				
-				// detect grounding:  angle between the collision normal and the world up is below 90 and veolcity is downwards
-				if (Vector2.Angle(colliderDistance.normal, Vector2.up) < 90 && velocity.y < 0)
-				{
-					grounded = true;
-				}
-			}
-		}
+		grounded = Physics2D.Raycast(legs.position, legs.up * -1.0f, 0.1f, platformLayerMask);
     }
 }
