@@ -12,7 +12,7 @@ public class Catch : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        var isThrowable = ContainsLayer(_throwableLayerMask, other.gameObject.layer);
+        var isThrowable = _throwableLayerMask.ContainsLayer(other.gameObject.layer);
         if (!isThrowable) return;
         
         var throwable = other.GetComponent<Throwable>();
@@ -35,11 +35,6 @@ public class Catch : MonoBehaviour
         if (throwable.IsHeldByPlayer) return false; // If the throwable is already held by a player
 
         return true;
-    }
-
-    private bool ContainsLayer(LayerMask mask, int layer)
-    {
-        return mask == (mask | (1 << layer));
     }
 
     public void SetAimDirection(Vector2 direction) {
