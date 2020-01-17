@@ -21,16 +21,21 @@ public class CharacterController2D : MonoBehaviour
 	[SerializeField]
 	float throwForce = 5;
 
+	[SerializeField]
+	float crosshairDistance = 4;
+
+	[SerializeField]
+	GameObject crosshair;
+
 	Throwable item;
 	
-	[SerializeField]
-	Transform center;
-
     private BoxCollider2D boxCollider;
 
     private Vector2 velocity;
 	
 	private bool grounded;
+
+	private Vector2 aimDirection;
 
     private void Awake()
     {      
@@ -41,12 +46,18 @@ public class CharacterController2D : MonoBehaviour
     {
 		float moveInput = Input.GetAxis("Horizontal");
 		
+		Vector2 newAimDirection = new Vector2(Input.GetAxis("aimHorizontal"), Input.GetAxis("aimVertical"));
+		if (newAimDirection.x != 0 || newAimDirection.y != 0) {
+			newAimDirection.Normalize();
+			aimDirection = newAimDirection;
+			crosshair.transform.localPosition = new Vector3(aimDirection.x * crosshairDistance, aimDirection.y * crosshairDistance, 0);
+		}
+
 		if (Input.GetButtonDown("Throw"))
 		{
-			Vector2 throwVelocity = new Vector2(Input.GetAxis("aimHorizontal"), Input.GetAxis("aimVertical"));
 			if (item) 
 			{
-				item.Throw(throwVelocity.normalized * throwForce);
+				item.Throw(aimDirection * throwForce);
 				item = null;
 			}
 		}
