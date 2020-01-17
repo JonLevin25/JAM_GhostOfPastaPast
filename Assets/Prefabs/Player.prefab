@@ -311,7 +311,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 9
   jumpHeight: 4
-  throwForce: 5
+  throwForce: 12
   crosshairDistance: 4
   crosshair: {fileID: 1577963820369150210}
   platformLayerMask:
@@ -320,6 +320,7 @@ MonoBehaviour:
   body: {fileID: 1651300612}
   legs: {fileID: 1114903292}
   _animController: {fileID: 1237416909806599725}
+  _catch: {fileID: 1202193624235450134}
   item: {fileID: 0}
 --- !u!114 &5008593726001240692
 MonoBehaviour:
@@ -451,3 +452,15 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1415726858991526464}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1202193624235450134 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 219164177491590486, guid: f1dca417045403e4e8bbfdede4f935d4,
+    type: 3}
+  m_PrefabInstance: {fileID: 1415726858991526464}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5dca39a20baf8474e8a39b3fac3511c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

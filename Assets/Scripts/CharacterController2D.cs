@@ -10,7 +10,7 @@ public class CharacterController2D : MonoBehaviour
     float jumpHeight = 4;
 
 	[SerializeField]
-	float throwForce = 5;
+	float throwForce = 20;
 
 	[SerializeField]
 	float crosshairDistance = 4;
@@ -27,7 +27,11 @@ public class CharacterController2D : MonoBehaviour
 	[SerializeField]
 	Transform legs;
 
-	[SerializeField] private CharAnimatorController _animController;
+	[SerializeField] 
+	private CharAnimatorController _animController;
+
+	[SerializeField]
+	Catch _catch;
 
 
 	public Throwable item;
@@ -36,7 +40,7 @@ public class CharacterController2D : MonoBehaviour
 
 	private Vector2 velocity;
 
-	private Vector2 aimDirection;
+	private Vector2 aimDirection = new Vector2(-1,0);
 
 	private void Update()
     {
@@ -56,6 +60,7 @@ public class CharacterController2D : MonoBehaviour
 			{
 				item.Throw(aimDirection * throwForce);
 				item = null;
+				_catch.HeldItem = null;
 			}
 		}
 		

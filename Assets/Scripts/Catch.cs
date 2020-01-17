@@ -27,6 +27,7 @@ public class Catch : MonoBehaviour
         throwable.transform.SetParent(_catchPosition, worldPositionStays: false);
         throwable.transform.localPosition = Vector3.zero;
         throwable.transform.rotation = Quaternion.identity;
+        throwable.rigidBody.velocity = Vector2.zero;
         throwable.GetComponent<Rigidbody2D>().isKinematic = true;
         player.GetComponent<CharacterController2D>().item = HeldItem;
     }
