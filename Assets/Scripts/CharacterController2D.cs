@@ -44,17 +44,21 @@ public class CharacterController2D : MonoBehaviour
 
 	private Vector2 aimDirection = new Vector2(-1,0);
 	private string horAxis;
-	private string verAxis;
+//	private string verAxis;
 	private string aimHorAxis;
 	private string aimVerAxis;
+	private string jumpButton;
+	private string throwButton;
 	
 	private void Start()
 	{
 		var config = PlayerConfig.GetConfig(_playerNum);
 		horAxis = config.HorizontalAxis;
-		verAxis = config.VerticalAxis;
+//		verAxis = config.VerticalAxis;
 		aimHorAxis = config.AimHorizontalAxis;
 		aimVerAxis = config.AimVerticalAxis;
+		jumpButton = config.JumpButton;
+		throwButton = config.ThrowButton;
 	}
 
 	private void Update()
@@ -62,7 +66,7 @@ public class CharacterController2D : MonoBehaviour
 		float moveInput = Input.GetAxis(horAxis);
 		Vector2 newVelocity = new Vector2(0f, body.velocity.y);
 		
-		Vector2 newAimDirection = new Vector2(Input.GetAxis(aimHorAxis), Input.GetAxis(aimHorAxis));
+		Vector2 newAimDirection = new Vector2(Input.GetAxis(aimHorAxis), Input.GetAxis(aimVerAxis));
 		if (newAimDirection.x != 0 || newAimDirection.y != 0) {
 			newAimDirection.Normalize();
 			aimDirection = newAimDirection;
@@ -70,7 +74,7 @@ public class CharacterController2D : MonoBehaviour
 			_catch.SetAimDirection(aimDirection);
 		}
 
-		if (Input.GetButtonDown("Throw"))
+		if (Input.GetButtonDown(throwButton))
 		{
 			if (item) 
 			{
@@ -81,7 +85,7 @@ public class CharacterController2D : MonoBehaviour
 		}
 		
 		var grounded = Physics2D.Raycast(legs.position, -legs.up, 0.1f, platformLayerMask);
-		if (grounded && Input.GetButtonDown("Jump"))
+		if (grounded && Input.GetButtonDown(jumpButton))
 		{
 			// Calculate the velocity required to achieve the target jump height.
 			newVelocity.y = Mathf.Sqrt(2 * jumpHeight * Mathf.Abs(Physics2D.gravity.y));

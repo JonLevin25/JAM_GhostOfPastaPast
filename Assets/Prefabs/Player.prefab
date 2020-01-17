@@ -80,6 +80,8 @@ MonoBehaviour:
   VerticalAxis: P1_Vertical
   AimHorizontalAxis: P1_AimHorizontal
   AimVerticalAxis: P1_AimVertical
+  JumpButton: P1_Jump
+  ThrowButton: P1_Throw
 --- !u!114 &4131468712699127856
 MonoBehaviour:
   m_ObjectHideFlags: 0
