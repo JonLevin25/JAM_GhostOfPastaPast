@@ -101,6 +101,6 @@ public class CharAnimatorController : MonoBehaviour
     private void SetAnimTrigger(string triggerName, bool rememberState = true)
     {
         _animator.SetTrigger(triggerName);
-        _stateHistory.AddAnimTrigger(triggerName);
+        if (rememberState) _stateHistory.AddAnimTrigger(triggerName);
     }
 }

@@ -226,7 +226,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 2
   _slowRotationSpeed: 480
-  _fastRotationSpeed: 1440
+  _fastRotationSpeed: 2000
   _rotateAroundAxis: 2
   _relativeTo: 0
   _reverse: 0
