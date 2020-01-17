@@ -5,6 +5,7 @@ public class CharAnimatorController : MonoBehaviour
     public enum RunDirection
     {
         Right,
+        Idle,
         Left
     }
     
@@ -30,9 +31,12 @@ public class CharAnimatorController : MonoBehaviour
     {
         var isRunning = Mathf.Abs(velocity.x) > 0.1f;
         SetRunning(isRunning);
-        
-        var shouldFlip = velocity.x < 0f;
-        _rend.flipX = shouldFlip;
+
+        var newDirection = GetDirection(velocity);
+        if (newDirection != RunDirection.Idle)
+        {
+            _rend.flipX = newDirection == RunDirection.Left;
+        }
     }
 
     private void SetAnimBool(string animProp, bool value)
@@ -45,5 +49,11 @@ public class CharAnimatorController : MonoBehaviour
     {
         _animator.SetTrigger(triggerName);
         _stateHistory.AddAnimTrigger(triggerName);
+    }
+
+    private RunDirection GetDirection(Vector2 velocity)
+    {
+        if (Mathf.Approximately(velocity.x, 0f)) return RunDirection.Idle;
+        return velocity.x > 0f ? RunDirection.Right : RunDirection.Left;
     }
 }
