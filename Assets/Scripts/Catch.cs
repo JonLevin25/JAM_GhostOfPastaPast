@@ -2,6 +2,8 @@
 
 public class Catch : MonoBehaviour
 {
+    [SerializeField]
+    GameObject player;
     [SerializeField] private Transform _catchPosition;
     [SerializeField] private LayerMask _throwableLayerMask;
 
@@ -25,6 +27,8 @@ public class Catch : MonoBehaviour
         throwable.transform.SetParent(_catchPosition, worldPositionStays: false);
         throwable.transform.localPosition = Vector3.zero;
         throwable.transform.rotation = Quaternion.identity;
+        throwable.GetComponent<Rigidbody2D>().isKinematic = true;
+        player.GetComponent<CharacterController2D>().item = HeldItem;
     }
 
     private bool CanCatchItem(Throwable throwable)
