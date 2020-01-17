@@ -48,6 +48,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rend: {fileID: 6808020351578152564}
   _historyBinder: {fileID: 2637524904926917927}
+  _throwableLayerMask:
+    serializedVersion: 2
+    m_Bits: 256
+  _playerNum: 0
 --- !u!70 &959077811582449116
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
