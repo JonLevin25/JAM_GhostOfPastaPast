@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class GhostController : MonoBehaviour
 {
+    [SerializeField] private Animator _anim;
     [SerializeField] private SpriteRenderer _rend;
     [SerializeField] private CharHistoryBinder _historyBinder;
     [SerializeField] private LayerMask _throwableLayerMask;
@@ -15,12 +16,20 @@ public class GhostController : MonoBehaviour
     {
         _playerConfig = PlayerConfig.GetConfig(_playerNum);
         SetColor(_playerConfig.PlayerColor, 0.4f);
+        
+        _playerConfig.PlayerHealth.OnHpChanged += OnHpChanged;
     }
 
     public void Init(CharStateHistory history, float secsDelay)
     {
         _historyBinder.SetHistorySource(history);
         _historyBinder.SetDelay(secsDelay);
+    }
+
+    private void OnHpChanged(int currhp, int totalhp, int delta)
+    {
+        // Get hit as soon as animator is
+        if (delta < 0f) _anim.SetTrigger(CharAnimatorController.AnimHit);
     }
 
     private void OnTriggerEnter2D(Collider2D other)

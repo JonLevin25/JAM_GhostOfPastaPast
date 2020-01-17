@@ -42,6 +42,7 @@ GameObject:
   - component: {fileID: 3427971047635951121}
   - component: {fileID: 4131468712699127856}
   - component: {fileID: 2698188526904342813}
+  - component: {fileID: 1033750789}
   m_Layer: 11
   m_Name: PlayerConfig
   m_TagString: Untagged
@@ -93,6 +94,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _startHP: 3
+  IsInvincible: 0
 --- !u!114 &2698188526904342813
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -107,6 +109,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _reference: {fileID: 4221727625778396922}
   _threshold: 0.6
+--- !u!114 &1033750789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1300733601111314718}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b0fcd8273127e04781647d80fa18d8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _health: {fileID: 4131468712699127856}
+  _inivincibleTime: 0.8
 --- !u!1 &1577963820369150210
 GameObject:
   m_ObjectHideFlags: 0
@@ -199,7 +215,7 @@ GameObject:
   - component: {fileID: 5252104641757600401}
   - component: {fileID: 1365342839433062460}
   - component: {fileID: 7631237118164659489}
-  m_Layer: 11
+  m_Layer: 14
   m_Name: Hitbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -235,7 +251,7 @@ MonoBehaviour:
   _playerNum: 0
   _trapLayerMask:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 8192
 --- !u!70 &7631237118164659489
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -525,7 +541,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _secsDelay: 2.5
-  _ghostColor: {r: 0.8301887, g: 0.19188325, b: 0.6731206, a: 0.5529412}
   _ghostPrefab: {fileID: 7739739227412069422, guid: 0b2aa93c6c297d1469c6a8995a3cb420,
     type: 3}
   _stateHistorySource: {fileID: 5008593726001240692}

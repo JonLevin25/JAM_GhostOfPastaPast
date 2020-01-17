@@ -27,9 +27,11 @@ public class Health : MonoBehaviour
 
     private void Awake() => _currHP = _startHP;
 
-    public delegate void OnHpChangedHandler(int currHp, int totalHp);
+    public delegate void OnHpChangedHandler(int currHp, int totalHp, int delta);
     public event OnHpChangedHandler OnHpChanged;
     public event Action OnDeath;
+
+    public bool IsInvincible;
 
     private int _currHP;
     private bool _isDead;
@@ -39,10 +41,10 @@ public class Health : MonoBehaviour
         get => _currHP;
         private set
         {
+            var delta = value - _currHP;
             _currHP = value;
             if (_currHP < 0f && !_isDead) Kill();
-            OnHpChanged?.Invoke(_currHP, _startHP);
-            
+            OnHpChanged?.Invoke(_currHP, _startHP, delta);
         } 
     }
 
@@ -54,6 +56,7 @@ public class Health : MonoBehaviour
 
     public void TakeDamage(int hp)
     {
+        if (IsInvincible) return;
         CurrentHP -= hp;
     }
 

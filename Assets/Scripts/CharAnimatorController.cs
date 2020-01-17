@@ -14,9 +14,12 @@ public class CharAnimatorController : MonoBehaviour
     [SerializeField] private CharStateHistory _stateHistory;
     [SerializeField] private SpriteRenderer _rend;
 
+    public const string AnimHit = "Hit";
+    
     private const string AnimJump = "Jump";
     private const string AnimAirborne = "Airborne";
     private const string AnimRun = "Run";
+    private const string AnimDeath = "Death";
 
     [SerializeField] private AudioClip _jumpAudio;
     [SerializeField] private AudioClip _landAudio;
@@ -33,6 +36,8 @@ public class CharAnimatorController : MonoBehaviour
     {
         _playerConfig = PlayerConfig.GetConfig(_playerNum);
         _rend.color = _playerConfig.PlayerColor;
+        _playerConfig.PlayerHealth.OnHpChanged += OnHpChanged;
+        _playerConfig.PlayerHealth.OnDeath += OnDeath;
     }
 
 
@@ -55,7 +60,7 @@ public class CharAnimatorController : MonoBehaviour
     }
 
     public void SetRunning(bool running) => SetAnimBool(AnimRun, running);
-    
+
     public void ConfigByVelocity(Vector2 velocity)
     {
         var isRunning = Mathf.Abs(velocity.x) > 0.1f;
@@ -68,13 +73,32 @@ public class CharAnimatorController : MonoBehaviour
         }
     }
 
+    private void OnHpChanged(int currhp, int totalhp, int delta)
+    {
+        if (delta < 0f) OnHit();
+    }
+
+    private void OnHit()
+    {
+        SetAnimTrigger(AnimHit, false);
+    }
+
+    private void OnDeath()
+    {
+        SetAnimTrigger(AnimDeath);
+    }
+
     private void SetAnimBool(string animProp, bool value)
     {
         _animator.SetBool(animProp, value);
         _stateHistory.AddAnimBool(animProp, value);
     }
 
-    private void SetAnimTrigger(string triggerName)
+    /// <summary>
+    /// Set a trigger in the animator
+    /// </summary>
+    /// <param name="rememberState"> Should the trigger be recorded for playback in the ghost later?</param>
+    private void SetAnimTrigger(string triggerName, bool rememberState = true)
     {
         _animator.SetTrigger(triggerName);
         _stateHistory.AddAnimTrigger(triggerName);

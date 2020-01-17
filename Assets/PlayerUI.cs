@@ -24,7 +24,7 @@ public class PlayerUI : MonoBehaviour
         health.OnDeath += OnDeath;
     }
 
-    private void OnHpChanged(int curr, int total)
+    private void OnHpChanged(int curr, int total, int delta)
     {
         var percent = (float) curr / total;
         _healthBar.SetFill(percent);
