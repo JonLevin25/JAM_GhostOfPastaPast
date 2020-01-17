@@ -1,17 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class HorizontalTrap : MonoBehaviour
 {
     [SerializeField]
-    float moveSpeed;
+    float moveSpeed = 5;
 
     [SerializeField]
     Rigidbody2D body;
 
     [SerializeField]
-    GameObject floor;
+    GameObject start;
+
+    [SerializeField]
+    GameObject end;
+
 
     private bool movingLeft = true;
 
@@ -29,10 +34,9 @@ public class HorizontalTrap : MonoBehaviour
         } else {
             body.velocity = new Vector2(moveSpeed, 0);
         }
-        var xThreshold = floor.transform.localScale.x / 2;
-        if (transform.localPosition.x < -xThreshold) {
+        if (transform.localPosition.x < start.transform.localPosition.x) {
             movingLeft = false;
-        } else if (transform.localPosition.x > xThreshold) {
+        } else if (transform.localPosition.x > end.transform.localPosition.x) {
             movingLeft = true;
         }
     }
