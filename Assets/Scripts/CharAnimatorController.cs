@@ -24,4 +24,9 @@ public class CharAnimatorController : MonoBehaviour
         _animator.SetBool(animProp, value);
         _stateHistory.AddAnimBool(animProp, value);
     }
+
+    public void SetGrounded(bool grounded)
+    {
+        // WIP
+    }
 }

@@ -319,6 +319,7 @@ MonoBehaviour:
     m_Bits: 512
   body: {fileID: 1651300612}
   legs: {fileID: 1114903292}
+  _animController: {fileID: 1237416909806599725}
   item: {fileID: 0}
 --- !u!114 &5008593726001240692
 MonoBehaviour:

@@ -27,14 +27,14 @@ public class CharacterController2D : MonoBehaviour
 	[SerializeField]
 	Transform legs;
 
+	[SerializeField] private CharAnimatorController _animController;
+
 
 	public Throwable item;
 	
     private BoxCollider2D boxCollider;
 
 	private Vector2 velocity;
-	
-	private bool grounded;
 
 	private Vector2 aimDirection;
 
@@ -58,22 +58,18 @@ public class CharacterController2D : MonoBehaviour
 				item = null;
 			}
 		}
-
-		// jump
-		if (grounded)
-		{
-			if (Input.GetButtonDown("Jump"))
-			{
-				// Calculate the velocity required to achieve the target jump height.
-				newVelocity.y = Mathf.Sqrt(2 * jumpHeight * Mathf.Abs(Physics2D.gravity.y));
-			}
-		}
 		
+		var grounded = Physics2D.Raycast(legs.position, -legs.up, 0.1f, platformLayerMask);
+		_animController.SetGrounded(grounded);
+		if (grounded && Input.GetButtonDown("Jump"))
+		{
+			// Calculate the velocity required to achieve the target jump height.
+			newVelocity.y = Mathf.Sqrt(2 * jumpHeight * Mathf.Abs(Physics2D.gravity.y));
+		}
+
 		// Update the velocity assignment statements to use our selected
 		// acceleration and deceleration values.
 		newVelocity.x =  speed * moveInput;
 		body.velocity = newVelocity;
-		
-		grounded = Physics2D.Raycast(legs.position, -legs.up, 0.1f, platformLayerMask);
     }
 }
