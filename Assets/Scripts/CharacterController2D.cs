@@ -3,6 +3,8 @@
 [RequireComponent(typeof(Collider2D))]
 public class CharacterController2D : MonoBehaviour
 {
+	[SerializeField] private PlayerNum _playerNum;
+	
     [SerializeField, Tooltip("Max speed, in units per second, that the character moves.")]
     float speed = 9;
 
@@ -41,13 +43,26 @@ public class CharacterController2D : MonoBehaviour
 	private Vector2 velocity;
 
 	private Vector2 aimDirection = new Vector2(-1,0);
+	private string horAxis;
+	private string verAxis;
+	private string aimHorAxis;
+	private string aimVerAxis;
+	
+	private void Start()
+	{
+		var config = PlayerConfig.GetConfig(_playerNum);
+		horAxis = config.HorizontalAxis;
+		verAxis = config.VerticalAxis;
+		aimHorAxis = config.AimHorizontalAxis;
+		aimVerAxis = config.AimVerticalAxis;
+	}
 
 	private void Update()
     {
-		float moveInput = Input.GetAxis("Horizontal");
+		float moveInput = Input.GetAxis(horAxis);
 		Vector2 newVelocity = new Vector2(0f, body.velocity.y);
 		
-		Vector2 newAimDirection = new Vector2(Input.GetAxis("aimHorizontal"), Input.GetAxis("aimVertical"));
+		Vector2 newAimDirection = new Vector2(Input.GetAxis(aimHorAxis), Input.GetAxis(aimHorAxis));
 		if (newAimDirection.x != 0 || newAimDirection.y != 0) {
 			newAimDirection.Normalize();
 			aimDirection = newAimDirection;

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerHitbox : MonoBehaviour
 {
     [SerializeField] private PlayerNum _playerNum;
     [SerializeField] private LayerMask _trapLayerMask;
