@@ -52,6 +52,7 @@ public class CharacterController2D : MonoBehaviour
 			newAimDirection.Normalize();
 			aimDirection = newAimDirection;
 			crosshair.transform.localPosition = new Vector3(aimDirection.x * crosshairDistance, aimDirection.y * crosshairDistance, 0);
+			_catch.SetAimDirection(aimDirection);
 		}
 
 		if (Input.GetButtonDown("Throw"))

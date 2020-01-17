@@ -45,4 +45,8 @@ public class Catch : MonoBehaviour
     {
         return mask == (mask | (1 << layer));
     }
+
+    public void SetAimDirection(Vector2 direction) {
+        _catchPosition.localPosition = new Vector3(direction.x, direction.y, 0);
+    }
 }
