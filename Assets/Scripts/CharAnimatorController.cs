@@ -28,8 +28,8 @@ public class CharAnimatorController : MonoBehaviour
     
     public void ConfigByVelocity(Vector3 velocity)
     {
-        var isRunning = velocity.sqrMagnitude > 0.2f;
         SetRunning(isRunning);
+        var isRunning = Mathf.Abs(velocity.x) > 0.1f;
         
         var shouldFlip = velocity.x < 0f;
         _rend.flipX = shouldFlip;
