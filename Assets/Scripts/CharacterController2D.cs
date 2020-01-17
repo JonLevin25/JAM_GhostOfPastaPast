@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-[RequireComponent(typeof(BoxCollider2D))]
+[RequireComponent(typeof(Collider2D))]
 public class CharacterController2D : MonoBehaviour
 {
     [SerializeField, Tooltip("Max speed, in units per second, that the character moves.")]
