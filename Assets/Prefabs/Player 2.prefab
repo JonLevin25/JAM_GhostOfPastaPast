@@ -11,11 +11,31 @@ PrefabInstance:
       propertyPath: _playerNum
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1237416909806599725, guid: 77526a34337868f93a43f54fd2f42e9d,
+        type: 3}
+      propertyPath: _playerNum
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1365342839433062460, guid: 77526a34337868f93a43f54fd2f42e9d,
         type: 3}
       propertyPath: _playerNum
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1475793439781987743, guid: 77526a34337868f93a43f54fd2f42e9d,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.372549
+      objectReference: {fileID: 0}
+    - target: {fileID: 1475793439781987743, guid: 77526a34337868f93a43f54fd2f42e9d,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.9254902
+      objectReference: {fileID: 0}
+    - target: {fileID: 1475793439781987743, guid: 77526a34337868f93a43f54fd2f42e9d,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.42565784
+      objectReference: {fileID: 0}
     - target: {fileID: 3427971047635951121, guid: 77526a34337868f93a43f54fd2f42e9d,
         type: 3}
       propertyPath: _playerNum
@@ -23,33 +43,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3427971047635951121, guid: 77526a34337868f93a43f54fd2f42e9d,
         type: 3}
-      propertyPath: HorizontalAxis
-      value: P2_Horizontal
-      objectReference: {fileID: 0}
-    - target: {fileID: 3427971047635951121, guid: 77526a34337868f93a43f54fd2f42e9d,
-        type: 3}
-      propertyPath: AimHorizontalAxis
-      value: P2_AimHorizontal
-      objectReference: {fileID: 0}
-    - target: {fileID: 3427971047635951121, guid: 77526a34337868f93a43f54fd2f42e9d,
-        type: 3}
-      propertyPath: AimVerticalAxis
-      value: P2_AimVertical
-      objectReference: {fileID: 0}
-    - target: {fileID: 3427971047635951121, guid: 77526a34337868f93a43f54fd2f42e9d,
-        type: 3}
-      propertyPath: JumpButton
-      value: P2_Jump
-      objectReference: {fileID: 0}
-    - target: {fileID: 3427971047635951121, guid: 77526a34337868f93a43f54fd2f42e9d,
-        type: 3}
-      propertyPath: ThrowButton
-      value: P2_Throw
-      objectReference: {fileID: 0}
-    - target: {fileID: 3427971047635951121, guid: 77526a34337868f93a43f54fd2f42e9d,
-        type: 3}
       propertyPath: UseMouseForAim
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3427971047635951121, guid: 77526a34337868f93a43f54fd2f42e9d,
+        type: 3}
+      propertyPath: _color.r
+      value: 0.19215682
+      objectReference: {fileID: 0}
+    - target: {fileID: 3427971047635951121, guid: 77526a34337868f93a43f54fd2f42e9d,
+        type: 3}
+      propertyPath: _color.g
+      value: 0.83137256
+      objectReference: {fileID: 0}
+    - target: {fileID: 3427971047635951121, guid: 77526a34337868f93a43f54fd2f42e9d,
+        type: 3}
+      propertyPath: _color.b
+      value: 0.25615913
       objectReference: {fileID: 0}
     - target: {fileID: 4221727625778396922, guid: 77526a34337868f93a43f54fd2f42e9d,
         type: 3}
@@ -127,6 +137,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 7861796281599915555, guid: 39b5598bc9e46ac4cb5510e2fdb16c65,
         type: 3}
+    - target: {fileID: 6396330297177701270, guid: 77526a34337868f93a43f54fd2f42e9d,
+        type: 3}
+      propertyPath: _ghostColor.a
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7970173754566676171, guid: 77526a34337868f93a43f54fd2f42e9d,
         type: 3}
       propertyPath: m_Name

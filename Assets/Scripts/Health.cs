@@ -27,6 +27,8 @@ public class Health : MonoBehaviour
 
     private void Awake() => _currHP = _startHP;
 
+    public delegate void OnHpChangedHandler(int currHp, int totalHp);
+    public event OnHpChangedHandler OnHpChanged;
     public event Action OnDeath;
 
     private int _currHP;
@@ -39,6 +41,8 @@ public class Health : MonoBehaviour
         {
             _currHP = value;
             if (_currHP < 0f && !_isDead) Kill();
+            OnHpChanged?.Invoke(_currHP, _startHP);
+            
         } 
     }
 

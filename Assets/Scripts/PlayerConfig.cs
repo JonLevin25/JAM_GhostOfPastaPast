@@ -6,8 +6,11 @@ public class PlayerConfig : MonoBehaviour
 {
     [SerializeField] PlayerNum _playerNum;
     [SerializeField] private MouseAimInput _mouseAim;
+    [SerializeField] private Color _color;
+    
     public Health PlayerHealth;
     public bool UseMouseForAim;
+    public Color PlayerColor => _color;
     
     public const string HorizontalAxis = "MoveHor";
     public const string AimHorizontalAxis = "AimHor";

@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class GhostController : MonoBehaviour
@@ -7,18 +6,20 @@ public class GhostController : MonoBehaviour
     [SerializeField] private CharHistoryBinder _historyBinder;
     [SerializeField] private LayerMask _throwableLayerMask;
     [SerializeField] private PlayerNum _playerNum;
+
+    public Color TEST_COlor;
     
-    private Health _health;
+    private PlayerConfig _playerConfig;
 
     private void Start()
     {
-        _health = PlayerConfig.GetConfig(_playerNum).PlayerHealth;
+        _playerConfig = PlayerConfig.GetConfig(_playerNum);
+        SetColor(_playerConfig.PlayerColor, 0.4f);
     }
-    
-    public void Init(CharStateHistory history, Color color, float secsDelay)
+
+    public void Init(CharStateHistory history, float secsDelay)
     {
         _historyBinder.SetHistorySource(history);
-        _rend.color = color;
         _historyBinder.SetDelay(secsDelay);
     }
 
@@ -30,7 +31,14 @@ public class GhostController : MonoBehaviour
         var throwable = other.GetComponent<Throwable>();
         if (!throwable.IsHeldByPlayer)
         {
-            _health.TakeDamage(1);
+            _playerConfig.PlayerHealth.TakeDamage(1);
         }
+    }
+
+    private void SetColor(Color color, float alpha)
+    {
+        color.a = alpha;
+        TEST_COlor = color;
+        _rend.color = color;
     }
 }

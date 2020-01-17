@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public enum RunDirection
@@ -10,6 +9,7 @@ public enum RunDirection
 
 public class CharAnimatorController : MonoBehaviour
 {
+    [SerializeField] private PlayerNum _playerNum;
     [SerializeField] private Animator _animator;
     [SerializeField] private CharStateHistory _stateHistory;
     [SerializeField] private SpriteRenderer _rend;
@@ -22,11 +22,17 @@ public class CharAnimatorController : MonoBehaviour
     [SerializeField] private AudioClip _landAudio;
 
     [SerializeField] private AudioSource _audioSource;
+    private PlayerConfig _playerConfig;
 
     private void Awake()
     {
         _audioSource = GetComponent<AudioSource>();
-        
+    }
+
+    private void Start()
+    {
+        _playerConfig = PlayerConfig.GetConfig(_playerNum);
+        _rend.color = _playerConfig.PlayerColor;
     }
 
 

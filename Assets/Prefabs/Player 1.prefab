@@ -77,6 +77,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerNum: 0
   _mouseAim: {fileID: 2698188526904342813}
+  _color: {r: 0.9245283, g: 0.37068352, b: 0.87197655, a: 1}
   PlayerHealth: {fileID: 4131468712699127856}
   UseMouseForAim: 0
 --- !u!114 &4131468712699127856
@@ -297,6 +298,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fd8f6ea0b0b44d8af5191601cb6e3fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerNum: 0
   _animator: {fileID: 2945090131072482355}
   _stateHistory: {fileID: 5008593726001240692}
   _rend: {fileID: 1475793439781987743}
