@@ -1,6 +1,26 @@
 using System;
 using UnityEngine;
 
+
+#if UNITY_EDITOR
+using UnityEditor;
+
+[CustomEditor(typeof(Health))]
+public class HealthEditor : Editor
+{
+    public override void OnInspectorGUI()
+    {
+        base.OnInspectorGUI();
+        var script = target as Health;
+
+        EditorGUI.BeginDisabledGroup(true);
+        EditorGUILayout.Space();
+        EditorGUILayout.IntField("Curr HP", script.CurrentHP);
+        EditorGUI.EndDisabledGroup();
+    }
+}
+#endif
+
 public class Health : MonoBehaviour
 {
     [SerializeField] private int _startHP;
