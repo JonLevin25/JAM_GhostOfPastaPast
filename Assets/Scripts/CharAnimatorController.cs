@@ -26,10 +26,10 @@ public class CharAnimatorController : MonoBehaviour
 
     public void SetRunning(bool running) => SetAnimBool(AnimRun, running);
     
-    public void ConfigByVelocity(Vector3 velocity)
+    public void ConfigByVelocity(Vector2 velocity)
     {
-        SetRunning(isRunning);
         var isRunning = Mathf.Abs(velocity.x) > 0.1f;
+        SetRunning(isRunning);
         
         var shouldFlip = velocity.x < 0f;
         _rend.flipX = shouldFlip;
