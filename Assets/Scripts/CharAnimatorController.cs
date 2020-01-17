@@ -1,15 +1,15 @@
 using System;
 using UnityEngine;
 
+public enum RunDirection
+{
+    Right,
+    Idle,
+    Left
+}
+
 public class CharAnimatorController : MonoBehaviour
 {
-    public enum RunDirection
-    {
-        Right,
-        Idle,
-        Left
-    }
-    
     [SerializeField] private Animator _animator;
     [SerializeField] private CharStateHistory _stateHistory;
     [SerializeField] private SpriteRenderer _rend;
@@ -55,7 +55,7 @@ public class CharAnimatorController : MonoBehaviour
         var isRunning = Mathf.Abs(velocity.x) > 0.1f;
         SetRunning(isRunning);
 
-        var newDirection = GetDirection(velocity);
+        var newDirection = velocity.GetDirection();
         if (newDirection != RunDirection.Idle)
         {
             _rend.flipX = newDirection == RunDirection.Left;
@@ -73,8 +73,11 @@ public class CharAnimatorController : MonoBehaviour
         _animator.SetTrigger(triggerName);
         _stateHistory.AddAnimTrigger(triggerName);
     }
+}
 
-    private RunDirection GetDirection(Vector2 velocity)
+public static class Extensions
+{
+    public static RunDirection GetDirection(this Vector2 velocity)
     {
         if (Mathf.Approximately(velocity.x, 0f)) return RunDirection.Idle;
         return velocity.x > 0f ? RunDirection.Right : RunDirection.Left;
