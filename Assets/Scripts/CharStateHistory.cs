@@ -44,17 +44,13 @@ public class CharState
 public class CharStateHistory : MonoBehaviour
 {
     [SerializeField] private Transform _transform;
-    [SerializeField] private Animator _animator;
-    
     public Queue<CharState> StateHistory = new Queue<CharState>();
 
     private List<AnimCommand> _lastFrameAnimCommands = new List<AnimCommand>();
     
-    public void SetAnimTrigger(string trigger)
+    public void AddAnimBool(string boolName, bool value)
     {
-        _animator.SetBool(trigger, true);
-        
-        var command = new AnimCommand(trigger, true);
+        var command = new AnimCommand(boolName, true);
         _lastFrameAnimCommands.Add(command);
     }
 
