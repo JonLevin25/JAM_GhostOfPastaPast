@@ -1,39 +1,26 @@
 ﻿using UnityEngine;
 
-[RequireComponent(typeof(Collider2D))]
 public class CharacterController2D : MonoBehaviour
 {
+	[Header("Basic Config")]
 	[SerializeField] private PlayerNum _playerNum;
+	[SerializeField] private LayerMask platformLayerMask;
 	
-    [SerializeField, Tooltip("Max speed, in units per second, that the character moves.")]
-    float speed = 9;
-
-    [SerializeField, Tooltip("Max height the character will jump regardless of gravity")]
-    float jumpHeight = 4;
-
-	[SerializeField]
-	float throwForce = 20;
-
-	[SerializeField]
-	float crosshairDistance = 4;
-
-	[SerializeField]
-	GameObject crosshair;
-
-	[SerializeField]
-	LayerMask platformLayerMask;
-
-	[SerializeField]
-	Rigidbody2D body;
-
-	[SerializeField]
-	Transform legs;
-
-	[SerializeField] 
-	private CharAnimatorController _animController;
-
-	[SerializeField]
-	Catch _catch;
+	[Header("References")]
+	[SerializeField] private Rigidbody2D body;
+	[SerializeField] private Transform legs;
+	[SerializeField] private CharAnimatorController _animController;
+	[SerializeField] private Catch _catch;
+	[SerializeField] private GameObject crosshair;
+	
+	[Header("Configuration")]
+	[Tooltip("Max speed, in units per second, that the character moves.")]
+    [SerializeField] float speed = 9;
+	[Tooltip("Max height the character will jump regardless of gravity")]
+    [SerializeField] float jumpHeight = 4;
+    [SerializeField] float throwForce = 20;
+    
+	[SerializeField] float crosshairDistance = 4;
 
 
 	public Throwable item;
@@ -43,30 +30,19 @@ public class CharacterController2D : MonoBehaviour
 	private Vector2 velocity;
 
 	private Vector2 aimDirection = new Vector2(-1,0);
-	private string horAxis;
-//	private string verAxis;
-	private string aimHorAxis;
-	private string aimVerAxis;
-	private string jumpButton;
-	private string throwButton;
+	private PlayerConfig playerConfig;
 	
 	private void Start()
 	{
-		var config = PlayerConfig.GetConfig(_playerNum);
-		horAxis = config.HorizontalAxis;
-//		verAxis = config.VerticalAxis;
-		aimHorAxis = config.AimHorizontalAxis;
-		aimVerAxis = config.AimVerticalAxis;
-		jumpButton = config.JumpButton;
-		throwButton = config.ThrowButton;
+		playerConfig = PlayerConfig.GetConfig(_playerNum);
 	}
 
 	private void Update()
-    {
-		float moveInput = Input.GetAxis(horAxis);
-		Vector2 newVelocity = new Vector2(0f, body.velocity.y);
+	{
+		var inputPayload = playerConfig.GetInput();
+		var newVelocity = new Vector2(0f, body.velocity.y);
 		
-		Vector2 newAimDirection = new Vector2(Input.GetAxis(aimHorAxis), Input.GetAxis(aimVerAxis));
+		var newAimDirection = inputPayload.Aim;
 		if (newAimDirection.x != 0 || newAimDirection.y != 0) {
 			newAimDirection.Normalize();
 			aimDirection = newAimDirection;
@@ -74,7 +50,7 @@ public class CharacterController2D : MonoBehaviour
 			_catch.SetAimDirection(aimDirection);
 		}
 
-		if (Input.GetButtonDown(throwButton))
+		if (inputPayload.Throw)
 		{
 			if (item) 
 			{
@@ -85,7 +61,7 @@ public class CharacterController2D : MonoBehaviour
 		}
 		
 		var grounded = Physics2D.Raycast(legs.position, -legs.up, 0.1f, platformLayerMask);
-		if (grounded && Input.GetButtonDown(jumpButton))
+		if (grounded && inputPayload.Jump)
 		{
 			// Calculate the velocity required to achieve the target jump height.
 			newVelocity.y = Mathf.Sqrt(2 * jumpHeight * Mathf.Abs(Physics2D.gravity.y));
@@ -94,7 +70,7 @@ public class CharacterController2D : MonoBehaviour
 
 		// Update the velocity assignment statements to use our selected
 		// acceleration and deceleration values.
-		newVelocity.x =  speed * moveInput;
+		newVelocity.x =  speed * inputPayload.MoveHorizontal;
 		body.velocity = newVelocity;
 		
 		// Set Animation state

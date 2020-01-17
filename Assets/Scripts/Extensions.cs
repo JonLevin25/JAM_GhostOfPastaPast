@@ -1,3 +1,4 @@
+using Rewired;
 using UnityEngine;
 
 public static class Extensions
@@ -11,5 +12,10 @@ public static class Extensions
     public static bool ContainsLayer(this LayerMask mask, int layer)
     {
         return mask == (mask | (1 << layer));
+    }
+
+    public static Rewired.Player GetPlayer(this PlayerNum playerNum)
+    {
+        return ReInput.players.GetPlayer((int) playerNum);
     }
 }
