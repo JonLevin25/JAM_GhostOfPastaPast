@@ -1,10 +1,13 @@
 using System.Collections.Generic;
+using Rewired;
 using UnityEngine;
 
 public class PlayerConfig : MonoBehaviour
 {
     [SerializeField] PlayerNum _playerNum;
+    [SerializeField] private MouseAimInput _mouseAim;
     public Health PlayerHealth;
+    public bool UseMouseForAim;
     
     public const string HorizontalAxis = "MoveHor";
     public const string AimHorizontalAxis = "AimHor";
@@ -22,13 +25,20 @@ public class PlayerConfig : MonoBehaviour
     {
         var rePlayer = _playerNum.GetPlayer();
         var move = rePlayer.GetAxis(HorizontalAxis);
-        var aim = new Vector2(
-            rePlayer.GetAxis(AimHorizontalAxis), 
-            rePlayer.GetAxis(AimVerticalAxis));
+        var aim = GetAim(rePlayer);
         var jump = rePlayer.GetButtonDown(JumpButton);
         var @throw = rePlayer.GetButtonDown(ThrowButton);
         
         return new PlayerInputPayload(move, aim, jump, @throw);
+    }
+
+    private Vector2 GetAim(Player rePlayer)
+    {
+        if (UseMouseForAim && _mouseAim != null) return _mouseAim.GetAim();
+
+        return new Vector2(
+            rePlayer.GetAxis(AimHorizontalAxis), 
+            rePlayer.GetAxis(AimVerticalAxis));
     }
 }
 

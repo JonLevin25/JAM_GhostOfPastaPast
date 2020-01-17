@@ -11,6 +11,11 @@ PrefabInstance:
       propertyPath: _playerNum
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1365342839433062460, guid: 77526a34337868f93a43f54fd2f42e9d,
+        type: 3}
+      propertyPath: _playerNum
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3427971047635951121, guid: 77526a34337868f93a43f54fd2f42e9d,
         type: 3}
       propertyPath: _playerNum
@@ -40,6 +45,11 @@ PrefabInstance:
         type: 3}
       propertyPath: ThrowButton
       value: P2_Throw
+      objectReference: {fileID: 0}
+    - target: {fileID: 3427971047635951121, guid: 77526a34337868f93a43f54fd2f42e9d,
+        type: 3}
+      propertyPath: UseMouseForAim
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4221727625778396922, guid: 77526a34337868f93a43f54fd2f42e9d,
         type: 3}

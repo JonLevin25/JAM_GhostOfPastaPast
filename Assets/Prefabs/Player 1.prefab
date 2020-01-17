@@ -41,6 +41,7 @@ GameObject:
   - component: {fileID: 4637608329511194069}
   - component: {fileID: 3427971047635951121}
   - component: {fileID: 4131468712699127856}
+  - component: {fileID: 2698188526904342813}
   m_Layer: 11
   m_Name: PlayerConfig
   m_TagString: Untagged
@@ -75,13 +76,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerNum: 0
+  _mouseAim: {fileID: 2698188526904342813}
   PlayerHealth: {fileID: 4131468712699127856}
-  HorizontalAxis: P1_Horizontal
-  VerticalAxis: P1_Vertical
-  AimHorizontalAxis: P1_AimHorizontal
-  AimVerticalAxis: P1_AimVertical
-  JumpButton: P1_Jump
-  ThrowButton: P1_Throw
+  UseMouseForAim: 0
 --- !u!114 &4131468712699127856
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -95,6 +92,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _startHP: 3
+--- !u!114 &2698188526904342813
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1300733601111314718}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34bf3ba342ebeae44856780561c9a8c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _reference: {fileID: 4221727625778396922}
+  _threshold: 0.6
 --- !u!1 &1577963820369150210
 GameObject:
   m_ObjectHideFlags: 0
@@ -185,7 +196,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5252104641757600401}
-  - component: {fileID: 8191834562106554326}
+  - component: {fileID: 1365342839433062460}
   - component: {fileID: 7631237118164659489}
   m_Layer: 11
   m_Name: Hitbox
@@ -208,7 +219,7 @@ Transform:
   m_Father: {fileID: 4221727625778396922}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8191834562106554326
+--- !u!114 &1365342839433062460
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -217,13 +228,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 2119236914906933167}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ba2b5d457494a349942d925c13e1ba1, type: 3}
+  m_Script: {fileID: 11500000, guid: 023f91ffccdc82d4abf076c71e8655e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _playerNum: 0
   _trapLayerMask:
     serializedVersion: 2
-    m_Bits: 8192
+    m_Bits: 256
 --- !u!70 &7631237118164659489
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -473,7 +484,7 @@ GameObject:
   - component: {fileID: 1651300612}
   - component: {fileID: 5138242206295395895}
   m_Layer: 11
-  m_Name: Player
+  m_Name: Player 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -529,11 +540,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerNum: 0
-  speed: 9
-  jumpHeight: 4
-  throwForce: 12
-  crosshairDistance: 4
-  crosshair: {fileID: 1577963820369150210}
   platformLayerMask:
     serializedVersion: 2
     m_Bits: 512
@@ -541,6 +547,11 @@ MonoBehaviour:
   legs: {fileID: 1114903292}
   _animController: {fileID: 1237416909806599725}
   _catch: {fileID: 1202193624235450134}
+  crosshair: {fileID: 1577963820369150210}
+  speed: 9
+  jumpHeight: 4
+  throwForce: 12
+  crosshairDistance: 4
   item: {fileID: 0}
 --- !u!114 &5008593726001240692
 MonoBehaviour:
