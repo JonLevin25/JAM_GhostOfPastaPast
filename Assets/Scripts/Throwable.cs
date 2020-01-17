@@ -12,4 +12,13 @@ public class Throwable : MonoBehaviour
         rigidBody.velocity = throwVector;
         transform.SetParent(null, worldPositionStays: true);
     }
+
+    public void Caught(Transform newParent) 
+    {
+        transform.SetParent(newParent, worldPositionStays: false);
+        transform.localPosition = Vector3.zero;
+        transform.rotation = Quaternion.identity;
+        rigidBody.velocity = Vector2.zero;
+        rigidBody.isKinematic = true;
+    }
 }

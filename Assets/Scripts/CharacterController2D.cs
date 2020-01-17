@@ -82,4 +82,9 @@ public class CharacterController2D : MonoBehaviour
 		_animController.SetGrounded(grounded);
 		_animController.ConfigByVelocity(newVelocity);
     }
+
+	public void ItemCaught(Throwable caughtItem) {
+		item = caughtItem;
+		_catch.SetAimDirection(aimDirection);
+	}
 }
