@@ -2,8 +2,15 @@ using UnityEngine;
 
 public class CharAnimatorController : MonoBehaviour
 {
+    public enum RunDirection
+    {
+        Right,
+        Left
+    }
+    
     [SerializeField] private Animator _animator;
     [SerializeField] private CharStateHistory _stateHistory;
+    [SerializeField] private SpriteRenderer _rend;
 
     private const string AnimJump = "Jump";
     private const string AnimAirborne = "Airborne";
@@ -11,13 +18,22 @@ public class CharAnimatorController : MonoBehaviour
 
     public void OnJump()
     {
-        SetAnimBool(AnimJump, true);
+        SetAnimTrigger(AnimJump);
         SetAnimBool(AnimAirborne, true);
     }
 
-    public void OnGrounded() => SetAnimBool(AnimAirborne, false);
+    public void SetGrounded(bool grounded) => SetAnimBool(AnimAirborne, !grounded);
 
     public void SetRunning(bool running) => SetAnimBool(AnimRun, running);
+    
+    public void ConfigByVelocity(Vector3 velocity)
+    {
+        var isRunning = velocity.sqrMagnitude > 0.2f;
+        SetRunning(isRunning);
+        
+        var shouldFlip = velocity.x < 0f;
+        _rend.flipX = shouldFlip;
+    }
 
     private void SetAnimBool(string animProp, bool value)
     {
@@ -25,8 +41,9 @@ public class CharAnimatorController : MonoBehaviour
         _stateHistory.AddAnimBool(animProp, value);
     }
 
-    public void SetGrounded(bool grounded)
+    private void SetAnimTrigger(string triggerName)
     {
-        // WIP
+        _animator.SetTrigger(triggerName);
+        _stateHistory.AddAnimTrigger(triggerName);
     }
 }

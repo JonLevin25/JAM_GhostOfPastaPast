@@ -55,7 +55,16 @@ public class CharHistoryBinder : MonoBehaviour
         if (stateCommands == null) return;
         foreach (var command in stateCommands)
         {
-            _animator.SetBool(command.PropName, command.PropValue);
+            var propName = command.PropName;
+            if (command.IsTrigger)
+            {
+                if (command.PropValue) _animator.SetTrigger(propName);
+                else _animator.ResetTrigger(propName);
+            }
+            else
+            {
+                _animator.SetBool(command.PropName, command.PropValue);
+            }
         }
     }
 }
