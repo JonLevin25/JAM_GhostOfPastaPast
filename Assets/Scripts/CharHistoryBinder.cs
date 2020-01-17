@@ -6,6 +6,7 @@ public class CharHistoryBinder : MonoBehaviour
     [SerializeField] private Transform _transform;
     [SerializeField] private CharStateHistory _stateHistory;
     [SerializeField] private Animator _animator;
+    [SerializeField] private SpriteRenderer _rend;
     
     [Space]
     [SerializeField] private float _secsDelay;
@@ -44,12 +45,20 @@ public class CharHistoryBinder : MonoBehaviour
         {
             state = queue.Dequeue();
             HandleAnimCommnads(state.Commands);
-
+            HandleRunDirection(state.Velocity);
+            
             var nextTime = state.Time;
             if (nextTime < targetTime) break;
         }
 
         return state;
+    }
+
+    private void HandleRunDirection(Vector2 velocity)
+    {
+        var dir = velocity.GetDirection();
+        if (dir == RunDirection.Idle) return;
+        _rend.flipX = dir == RunDirection.Left;
     }
 
     private void HandleAnimCommnads(IEnumerable<AnimCommand> stateCommands)
