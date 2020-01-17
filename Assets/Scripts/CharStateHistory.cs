@@ -20,15 +20,18 @@ public class CharState
     public readonly Vector3 LocalPosition;
     public readonly Quaternion LocalRotation;
     public readonly Vector3 LocalScale;
+
+    public readonly Vector2 Velocity;
     public float Time;
     private List<AnimCommand> _commands = new List<AnimCommand>();
     public IEnumerable<AnimCommand> Commands => _commands;
 
-    public CharState(Vector3 localPosition, Quaternion localRotation, Vector3 localScale, float time)
+    public CharState(Vector3 localPosition, Quaternion localRotation, Vector3 localScale, Vector2 velocity, float time)
     {
         LocalPosition = localPosition;
         LocalRotation = localRotation;
         LocalScale = localScale;
+        Velocity = velocity;
         Time = time;
     }
 
@@ -46,6 +49,7 @@ public class CharState
 public class CharStateHistory : MonoBehaviour
 {
     [SerializeField] private Transform _transform;
+    [SerializeField] private Rigidbody2D _rb;
 
     public Queue<CharState> StateHistory = new Queue<CharState>();
 
@@ -66,7 +70,8 @@ public class CharStateHistory : MonoBehaviour
     private void Update()
     {
         var newState = new CharState(
-            _transform.localPosition, _transform.localRotation, _transform.localScale, Time.time);
+            _transform.localPosition, _transform.localRotation, _transform.localScale,
+            _rb.velocity, Time.time);
         
         // Add animation commands
         newState.AddAnimCommands(_lastFrameAnimCommands);
