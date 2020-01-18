@@ -318,9 +318,12 @@ MonoBehaviour:
   _animator: {fileID: 2945090131072482355}
   _stateHistory: {fileID: 5008593726001240692}
   _rend: {fileID: 1475793439781987743}
+  _audioSource: {fileID: 0}
   _jumpAudio: {fileID: 8300000, guid: 74485b3cafba6204cb62b03aabb20b9b, type: 3}
   _landAudio: {fileID: 8300000, guid: 8fcd2dadc816a984492cbc40037546b9, type: 3}
-  _audioSource: {fileID: 0}
+  _throwAudio: {fileID: 0}
+  _hitAudio: {fileID: 0}
+  _deathAudio: {fileID: 0}
 --- !u!212 &1475793439781987743
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -497,6 +500,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4221727625778396922}
   - component: {fileID: 6396330297177701270}
+  - component: {fileID: 6820844062337184734}
   - component: {fileID: 1651300610}
   - component: {fileID: 5008593726001240692}
   - component: {fileID: 1651300612}
@@ -544,6 +548,19 @@ MonoBehaviour:
   _ghostPrefab: {fileID: 7739739227412069422, guid: 0b2aa93c6c297d1469c6a8995a3cb420,
     type: 3}
   _stateHistorySource: {fileID: 5008593726001240692}
+--- !u!114 &6820844062337184734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7970173754566676171}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45c2828fd2744efdb68efabad894b4b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _newValue: 0
 --- !u!114 &1651300610
 MonoBehaviour:
   m_ObjectHideFlags: 0
