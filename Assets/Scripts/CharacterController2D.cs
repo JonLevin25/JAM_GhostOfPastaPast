@@ -58,6 +58,7 @@ public class CharacterController2D : MonoBehaviour
 		{
 			if (item) 
 			{
+				_animController.OnThrow();
 				item.Throw(aimDirection * throwForce);
 				item = null;
 				_catch.HeldItem = null;

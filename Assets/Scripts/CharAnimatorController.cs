@@ -14,22 +14,28 @@ public class CharAnimatorController : MonoBehaviour
     [SerializeField] private CharStateHistory _stateHistory;
     [SerializeField] private SpriteRenderer _rend;
 
-    public const string AnimHit = "Hit";
+    [Header("Audio")]
+    [SerializeField] private AudioSource _audioSource;
+    [SerializeField] private AudioClip _jumpAudio;
+    [SerializeField] private AudioClip _landAudio;
+    [SerializeField] private AudioClip _throwAudio;
+    [SerializeField] private AudioClip _hitAudio;
+    [SerializeField] private AudioClip _deathAudio;
     
+
+    
+    public const string AnimHit = "Hit";
     private const string AnimJump = "Jump";
+    private const string AnimThrow = "Throw";
     private const string AnimAirborne = "Airborne";
     private const string AnimRun = "Run";
     private const string AnimDeath = "Death";
 
-    [SerializeField] private AudioClip _jumpAudio;
-    [SerializeField] private AudioClip _landAudio;
-
-    [SerializeField] private AudioSource _audioSource;
     private PlayerConfig _playerConfig;
 
     private void Awake()
     {
-        _audioSource = GetComponent<AudioSource>();
+        if (_audioSource == null) _audioSource = GetComponent<AudioSource>();
     }
 
     private void Start()
@@ -39,24 +45,25 @@ public class CharAnimatorController : MonoBehaviour
         _playerConfig.PlayerHealth.OnHpChanged += OnHpChanged;
         _playerConfig.PlayerHealth.OnDeath += OnDeath;
     }
-
-
+    
     public void OnJump()
     {
         SetAnimTrigger(AnimJump);
         SetAnimBool(AnimAirborne, true);
-        _audioSource.clip = _jumpAudio;
-        _audioSource.Play();
+        PlaySFX(_jumpAudio);
     }
 
     public void SetGrounded(bool grounded)
     {
-        if (grounded && _animator.GetBool(AnimAirborne) == false)
-        {
-            // _audioSource.clip = _landAudio;
-            // _audioSource.Play();
-        }
+        var justLanded = grounded && _animator.GetBool(AnimAirborne);
+        if (justLanded) PlaySFX(_landAudio);
         SetAnimBool(AnimAirborne, !grounded);
+    }
+
+    public void OnThrow()
+    {
+        SetAnimTrigger(AnimThrow);
+        PlaySFX(_throwAudio);
     }
 
     public void SetRunning(bool running) => SetAnimBool(AnimRun, running);
@@ -81,12 +88,13 @@ public class CharAnimatorController : MonoBehaviour
     private void OnHit()
     {
         SetAnimTrigger(AnimHit, false);
+        PlaySFX(_hitAudio);
     }
 
     private void OnDeath()
     {
-        
         SetAnimTrigger(AnimDeath);
+        PlaySFX(_deathAudio);
     }
 
     private void SetAnimBool(string animProp, bool value)
@@ -103,5 +111,13 @@ public class CharAnimatorController : MonoBehaviour
     {
         _animator.SetTrigger(triggerName);
         if (rememberState) _stateHistory.AddAnimTrigger(triggerName);
+    }
+
+    private void PlaySFX(AudioClip clip)
+    {
+        if (clip == null) return;
+
+        _audioSource.clip = clip;
+        _audioSource.Play();
     }
 }
