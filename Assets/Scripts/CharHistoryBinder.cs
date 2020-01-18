@@ -16,7 +16,7 @@ public class CharHistoryBinder : MonoBehaviour
         var queue = _stateHistory.StateHistory;
         // Get Most recent update that's at least <_secsDelay> behind time
         var targetTime = Time.time - _secsDelay;
-        var state = MostRecentStateBefore(queue, targetTime);
+        var state = FirstStateAfterTime(queue, targetTime);
         if (state != null)
         {
             Bind(state);
@@ -36,7 +36,7 @@ public class CharHistoryBinder : MonoBehaviour
     /// Get Most recent state
     /// ALSO ACTIVATES ANIM COMMANDS ALONG THE WAY
     /// </summary>
-    private CharState MostRecentStateBefore(Queue<CharState> queue, float targetTime)
+    private CharState FirstStateAfterTime(Queue<CharState> queue, float targetTime)
     {
         if (queue.Count == 0 || queue.Peek().Time > targetTime) return null; 
             
@@ -47,8 +47,7 @@ public class CharHistoryBinder : MonoBehaviour
             HandleAnimCommnads(state.Commands);
             HandleRunDirection(state.Velocity);
             
-            var nextTime = state.Time;
-            if (nextTime < targetTime) break;
+            if (state.Time > targetTime) break;
         }
 
         return state;

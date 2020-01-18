@@ -150,6 +150,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8004755568703291548}
   - component: {fileID: 776629302}
+  - component: {fileID: 1953808550}
   m_Layer: 0
   m_Name: Crosshair
   m_TagString: Untagged
@@ -165,8 +166,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1577963820369150210}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4, y: 0, z: 0}
-  m_LocalScale: {x: 0.423, y: 0.327, z: 1}
+  m_LocalPosition: {x: -2.5, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4221727625778396922}
   m_RootOrder: 3
@@ -210,7 +211,7 @@ SpriteRenderer:
   m_SortingLayerID: 280286381
   m_SortingLayer: 2
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 8278ab46b5e14a7d896e2359af526357, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 023d89a707965e14dbe00d5f0c33ce69, type: 3}
   m_Color: {r: 0.8490566, g: 0.20024922, b: 0.20024922, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -221,6 +222,21 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1953808550
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1577963820369150210}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef695ef35602d534c800759f77f3af4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerNum: 0
+  _rend: {fileID: 776629302}
+  _image: {fileID: 0}
 --- !u!1 &2119236914906933167
 GameObject:
   m_ObjectHideFlags: 0
@@ -593,7 +609,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34ca6dde2dd343758895a117e146caa3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _secsDelay: 2.5
+  _playerNum: 0
+  _secsDelay: 2
   _ghostPrefab: {fileID: 7739739227412069422, guid: 0b2aa93c6c297d1469c6a8995a3cb420,
     type: 3}
   _stateHistorySource: {fileID: 5008593726001240692}
@@ -634,7 +651,7 @@ MonoBehaviour:
   speed: 9
   jumpHeight: 4
   throwForce: 12
-  crosshairDistance: 4
+  crosshairDistance: 2.5
   item: {fileID: 0}
 --- !u!114 &5008593726001240692
 MonoBehaviour:
