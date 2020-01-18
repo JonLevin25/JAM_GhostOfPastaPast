@@ -39,7 +39,7 @@ public class PlayersManager : MonoBehaviour
         }
     }
 
-    private void OnPlayerDeath(PlayerSlot playerSlot)
+    private void OnPlayerDeath(PlayerSlot playerSlot) 
     {
         playerSlot.IsAlive = false;
         var livePlayers = _playerSlots.Where(slot => slot.IsAlive).ToArray();

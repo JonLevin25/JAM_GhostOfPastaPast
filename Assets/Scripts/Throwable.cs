@@ -11,6 +11,7 @@ public class Throwable : MonoBehaviour
         rigidBody.isKinematic = false;
         rigidBody.velocity = throwVector;
         transform.SetParent(null, worldPositionStays: true);
+        IsHeldByPlayer = false;
     }
 
     public void Caught(Transform newParent) 
@@ -20,5 +21,6 @@ public class Throwable : MonoBehaviour
         transform.rotation = Quaternion.identity;
         rigidBody.velocity = Vector2.zero;
         rigidBody.isKinematic = true;
+        IsHeldByPlayer = true;
     }
 }
