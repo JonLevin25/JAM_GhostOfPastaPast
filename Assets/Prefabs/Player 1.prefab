@@ -40,8 +40,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4637608329511194069}
   - component: {fileID: 3427971047635951121}
-  - component: {fileID: 4131468712699127856}
+  - component: {fileID: 2085000956125828783}
   - component: {fileID: 2698188526904342813}
+  - component: {fileID: 4131468712699127856}
   - component: {fileID: 1033750789}
   m_Layer: 11
   m_Name: PlayerConfig
@@ -79,9 +80,10 @@ MonoBehaviour:
   _playerNum: 0
   _mouseAim: {fileID: 2698188526904342813}
   _color: {r: 0.9245283, g: 0.37068352, b: 0.87197655, a: 1}
+  PlayerRootObject: {fileID: 7970173754566676171}
   PlayerHealth: {fileID: 4131468712699127856}
-  UseMouseForAim: 0
---- !u!114 &4131468712699127856
+  PlayerInput: {fileID: 2085000956125828783}
+--- !u!114 &2085000956125828783
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -90,11 +92,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1300733601111314718}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 554c38bfe26947b5b3684ea27e035fdf, type: 3}
+  m_Script: {fileID: 11500000, guid: e62d324400254065931e530153ad7390, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _startHP: 3
-  IsInvincible: 0
+  _playerNum: 0
+  _mouseAim: {fileID: 2698188526904342813}
+  _useMouseForAim: 0
 --- !u!114 &2698188526904342813
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -109,6 +112,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _reference: {fileID: 4221727625778396922}
   _threshold: 0.6
+--- !u!114 &4131468712699127856
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1300733601111314718}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 554c38bfe26947b5b3684ea27e035fdf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _startHP: 3
+  IsInvincible: 0
 --- !u!114 &1033750789
 MonoBehaviour:
   m_ObjectHideFlags: 0

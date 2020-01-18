@@ -36,6 +36,16 @@ PrefabInstance:
       propertyPath: m_Color.b
       value: 0.42565784
       objectReference: {fileID: 0}
+    - target: {fileID: 2085000956125828783, guid: 77526a34337868f93a43f54fd2f42e9d,
+        type: 3}
+      propertyPath: _playerNum
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2085000956125828783, guid: 77526a34337868f93a43f54fd2f42e9d,
+        type: 3}
+      propertyPath: _useMouseForAim
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3427971047635951121, guid: 77526a34337868f93a43f54fd2f42e9d,
         type: 3}
       propertyPath: _playerNum
@@ -140,6 +150,11 @@ PrefabInstance:
     - target: {fileID: 6396330297177701270, guid: 77526a34337868f93a43f54fd2f42e9d,
         type: 3}
       propertyPath: _ghostColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6820844062337184734, guid: 77526a34337868f93a43f54fd2f42e9d,
+        type: 3}
+      propertyPath: _newValue
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7970173754566676171, guid: 77526a34337868f93a43f54fd2f42e9d,

@@ -43,7 +43,7 @@ public class CharacterController2D : MonoBehaviour
 	private void Update()
 	{
 		 if (dead) return;
-		var inputPayload = playerConfig.GetInput();
+		var inputPayload = playerConfig.PlayerInput.GetInput();
 		var newVelocity = new Vector2(0f, body.velocity.y);
 		
 		var newAimDirection = inputPayload.Aim;
