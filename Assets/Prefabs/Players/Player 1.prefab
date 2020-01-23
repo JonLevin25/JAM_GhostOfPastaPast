@@ -124,7 +124,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 554c38bfe26947b5b3684ea27e035fdf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _startHP: 3
+  _startHP: 15
   IsInvincible: 0
 --- !u!114 &1033750789
 MonoBehaviour:
