@@ -70,6 +70,9 @@ Material:
     - _OcclusionStrength: 1
     - _QueueOffset: 0
     - _ReceiveShadows: 1
+    - _RippleScale: 2
+    - _RippleSpeed: 1
+    - _RippleStartTime: 12.956756
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
