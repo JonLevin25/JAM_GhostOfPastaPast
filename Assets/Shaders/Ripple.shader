@@ -3,7 +3,10 @@
     Properties
     {
         _MainTex ("Texture", 2D) = "white" {}
-        _Period ("Period", float) = 0.5
+        _RippleScale ("Ripple Scale", float) = 0.1
+        _RipplePeriod ("Ripple Period", float) = 0.5
+        _RippleSpeed ("Ripple Speed", float) = 0.5
+        _HorCenter ("Horizontal Center", Float) = 0.5
     }
     SubShader
     {
@@ -39,14 +42,17 @@
             };
 
             sampler2D _MainTex;
-            float _Period;
+            
+            float _RippleScale;
+            float _RipplePeriod;
+            float _RippleSpeed;
             float4 _MainTex_ST;
             
-            fixed Blend(float normalizedY, float offset, float period)
+            fixed SinBlendGoingUp(float value, float offset, float period)
             {
-            // Calculate blend by height
-                fixed blendNegToPosOne = cos((2 * M_PI / period) * (normalizedY + offset));
-                return blendNegToPosOne + 1;
+                // Calculate blend by height
+                fixed blendNegToPosOne = cos((2 * M_PI / period) * -value + offset);
+                return (blendNegToPosOne + 1) / 2;
             }
             
             fixed stepNegPos(float reference, float variable)
@@ -65,23 +71,31 @@
                 
                 o.vertex = UnityObjectToClipPos(v.vertex);
                 o.uv = TRANSFORM_TEX(v.uv, _MainTex);
-                 
-                
-                //o.vertex += fixed4(blend * 1, 0, 0, 0);
+
                 return o;
             }
 
             fixed4 frag (v2f i) : SV_Target
             {
-                fixed blend = Blend(i.uv.y, _Time[3], _Period);
-                fixed wetDelta = stepNegPos(0.5, i.uv.x) * sinTime01() * 0.1;
+                fixed blend = SinBlendGoingUp(i.uv.y, _RippleSpeed * _Time[3], _RipplePeriod);
                 
-                i.uv.x += blend * wetDelta; // Wet blend
-            
-                // sample the texture
+                float scaleCenter = 0.5f;
+                float wet = (i.uv.x - scaleCenter) * _RippleScale + scaleCenter;
+
+                //float wetDelta = stepNegPos(0.5, i.uv.x) * _RippleScale;
+                
+                i.uv.x = i.uv.x * (1-blend) + wet * blend;
+                
                 fixed4 col = tex2D(_MainTex, i.uv);
-                
-                col.rgb *= col.a;
+                return col;
+               // test wetDelta
+               col.gb = 0;
+               col.r = wet;
+               return col   ;
+               // test blend
+               col.gb = 0;
+               col.r = blend;
+               
                
                 return col;
             }
