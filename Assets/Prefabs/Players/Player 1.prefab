@@ -610,7 +610,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerNum: 0
-  _secsDelay: 0.6
+  _secsDelay: 0.4
   _ghostPrefab: {fileID: 7739739227412069422, guid: 0b2aa93c6c297d1469c6a8995a3cb420,
     type: 3}
   _stateHistorySource: {fileID: 5008593726001240692}
