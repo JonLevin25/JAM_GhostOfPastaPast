@@ -147,14 +147,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 6920324}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9dbff81a70fdf3c4b87554da4ee9d17f, type: 3}
+  m_Script: {fileID: 11500000, guid: 08bc4591d802fed45b7a950b6a4a752d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   mat: {fileID: 2100000, guid: f7c38fc2311df1f43b4b6f4ef9978836, type: 2}
-  startTimeProp: _RippleStartTime
-  rippleScaleProp: _RippleScale
-  rippleScaleOn: 2
-  rippleScaleOff: 1
+  _rippleStartTimeProp: _RippleStartTime
+  _rippleScaleProp: _RippleScale
+  _useShaderTime: 0
+  _rippleScaleOFF: 1
+  _rippleScaleON: 2
 --- !u!4 &6920326
 Transform:
   m_ObjectHideFlags: 0
