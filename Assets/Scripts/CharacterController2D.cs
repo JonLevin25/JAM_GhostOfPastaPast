@@ -44,7 +44,7 @@ public class CharacterController2D : MonoBehaviour
 	{
 		 if (dead) return;
 		var inputPayload = playerConfig.PlayerInput.GetInput();
-		var newVelocity = new Vector2(0f, body.velocity.y);
+		var newVelocity = new Vector2(0f, body.linearVelocity.y);
 		
 		var newAimDirection = inputPayload.Aim;
 		if (newAimDirection.x != 0 || newAimDirection.y != 0) {
@@ -76,7 +76,7 @@ public class CharacterController2D : MonoBehaviour
 		// Update the velocity assignment statements to use our selected
 		// acceleration and deceleration values.
 		newVelocity.x =  speed * inputPayload.MoveHorizontal;
-		body.velocity = newVelocity;
+		body.linearVelocity = newVelocity;
 		
 		// Set Animation state
 		_animController.SetGrounded(grounded);
@@ -85,7 +85,7 @@ public class CharacterController2D : MonoBehaviour
 
 	private void OnDeath()
 	{
-		body.velocity = Vector2.zero;
+		body.linearVelocity = Vector2.zero;
 		dead = true;
 	}
 

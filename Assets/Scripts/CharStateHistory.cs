@@ -71,7 +71,7 @@ public class CharStateHistory : MonoBehaviour
     {
         var newState = new CharState(
             _transform.localPosition, _transform.localRotation, _transform.localScale,
-            _rb.velocity, Time.time);
+            _rb.linearVelocity, Time.time);
         
         // Add animation commands
         newState.AddAnimCommands(_lastFrameAnimCommands);

@@ -23,9 +23,9 @@ public class HorizontalTrap : MonoBehaviour
     void Update()
     {
         if (movingLeft) {
-            body.velocity = new Vector2(-moveSpeed, 0);
+            body.linearVelocity = new Vector2(-moveSpeed, 0);
         } else {
-            body.velocity = new Vector2(moveSpeed, 0);
+            body.linearVelocity = new Vector2(moveSpeed, 0);
         }
         if (body.position.x < start.transform.position.x) {
             movingLeft = false;

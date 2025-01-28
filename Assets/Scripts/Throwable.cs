@@ -9,7 +9,7 @@ public class Throwable : MonoBehaviour
     public void Throw(Vector2 throwVector) 
     {
         rigidBody.isKinematic = false;
-        rigidBody.velocity = throwVector;
+        rigidBody.linearVelocity = throwVector;
         transform.SetParent(null, worldPositionStays: true);
         IsHeldByPlayer = false;
     }
@@ -19,7 +19,7 @@ public class Throwable : MonoBehaviour
         transform.SetParent(newParent, worldPositionStays: false);
         transform.localPosition = Vector3.zero;
         transform.rotation = Quaternion.identity;
-        rigidBody.velocity = Vector2.zero;
+        rigidBody.linearVelocity = Vector2.zero;
         rigidBody.isKinematic = true;
         IsHeldByPlayer = true;
     }
